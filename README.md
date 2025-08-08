@@ -34,20 +34,37 @@ python demo.py
 ```
 The reminder will appear every 10 minutes automatically.
 
+
 ## Run on Startup (Optional)
-1. Create a batch file `eye_reminder.bat`:
-   ```bat
-   @echo off
-   cd /d D:\Programming\PY Code\Eye Break
-   "D:\Programming\PY Code\Eye Break\.venv\Scripts\python.exe" "D:\Programming\PY Code\Eye Break\demo.py"
-   ```
-2. (Recommended) Create a VBScript `eye_reminder_launcher.vbs` to run silently:
-   ```vbscript
-   Set WshShell = CreateObject("WScript.Shell")
-   WshShell.Run chr(34) & "D:\Programming\PY Code\Eye Break\eye_reminder.bat" & chr(34), 0
-   Set WshShell = Nothing
-   ```
-3. Place the `.vbs` file in your Windows Startup folder (`Win + R`, type `shell:startup`).
+
+### 1. Create or Edit the Batch File (`eye_reminder.bat`)
+Example content:
+```bat
+@echo off
+cd /d D:\Programming\PY Code\Eye Break
+"D:\Programming\PY Code\Eye Break\.venv\Scripts\python.exe" "D:\Programming\PY Code\Eye Break\demo.py"
+```
+
+**How to customize:**
+- Change all paths (`D:\Programming\PY Code\Eye Break`) to match the folder where you placed your project.
+- If your Python virtual environment is in a different location, update the `.venv\Scripts\python.exe` path accordingly.
+
+### 2. Create or Edit the VBScript (`eye_reminder_launcher.vbs`)
+Example content:
+```vbscript
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run chr(34) & "D:\Programming\PY Code\Eye Break\eye_reminder.bat" & chr(34), 0
+Set WshShell = Nothing
+```
+
+**How to customize:**
+- Change the path inside `chr(34) & "..." & chr(34)` to the location of your `.bat` file.
+
+### 3. Add to Startup
+- Press `Win + R`, type `shell:startup`, and press Enter.
+- Copy your `.vbs` file into the Startup folder.
+
+Now, your reminder will run automatically every time you log in to Windows.
 
 ## How It Works
 - When started, the program runs in the background.
