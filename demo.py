@@ -4,66 +4,13 @@ import threading
 import time
 from plyer import notification
 import winsound
-import os
 import ctypes
 
 class EyeReminder:
     def __init__(self):
         self.root = tk.Tk()
         self.root.withdraw()  # Hide the main window
-        self.interval_file = "interval.txt"
-        self.interval_minutes = self.load_interval()
-        self.reminder_thread = None
-        self.show_interval_gui()
-
-    def load_interval(self):
-        if os.path.exists(self.interval_file):
-            try:
-                with open(self.interval_file, 'r') as f:
-                    val = int(f.read().strip())
-                    if val > 0:
-                        return val
-            except Exception:
-                pass
-        return 10  # Default interval
-
-    def save_interval(self, val):
-        try:
-            with open(self.interval_file, 'w') as f:
-                f.write(str(val))
-        except Exception:
-            pass
-
-    def show_interval_gui(self):
-        self.interval_win = tk.Toplevel()
-        self.interval_win.title("Set Reminder Interval")
-        self.interval_win.geometry("300x150")
-        self.interval_win.attributes('-topmost', True)
-        label = tk.Label(self.interval_win, text="Set interval (minutes):", font=("Arial", 12))
-        label.pack(pady=10)
-        self.interval_var = tk.StringVar(value=str(self.interval_minutes))
-        entry = tk.Entry(self.interval_win, textvariable=self.interval_var, font=("Arial", 12), justify='center')
-        entry.pack(pady=5)
-        set_btn = tk.Button(self.interval_win, text="Start Reminder", font=("Arial", 12), command=self.start_reminder)
-        set_btn.pack(pady=10)
-        entry.focus()
-        self.interval_win.protocol("WM_DELETE_WINDOW", self.on_close_interval_win)
-
-    def on_close_interval_win(self):
-        self.root.destroy()
-
-    def start_reminder(self):
-        try:
-            val = int(self.interval_var.get())
-            if val <= 0:
-                raise ValueError
-            self.interval_minutes = val
-            self.save_interval(val)
-        except ValueError:
-            tk.messagebox.showerror("Invalid Input", "Please enter a positive integer for minutes.")
-            return
-        self.interval_win.destroy()
-        self.root.deiconify()
+        self.interval_minutes = 10  # Default interval in minutes
         self.reminder_thread = threading.Thread(target=self.show_reminder_loop, daemon=True)
         self.reminder_thread.start()
         self.root.mainloop()

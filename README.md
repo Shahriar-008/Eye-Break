@@ -1,10 +1,10 @@
+
 # Eye Blink Reminder
 
-A customizable eye blink reminder for Windows, built with Python and Tkinter. This tool helps you maintain eye health by reminding you to blink at user-defined intervals with a popup, sound, and notification. The interval is persistent and can be changed via a simple GUI.
+A simple eye blink reminder for Windows, built with Python and Tkinter. This tool helps you maintain eye health by reminding you to blink every 10 minutes with a popup, sound, and notification.
 
 ## Features
-- Set your own reminder interval (in minutes) via a GUI
-- Interval is saved and persists between runs
+- Reminds you to blink every 10 minutes (default, not user-settable)
 - Popup with blinking ASCII art eyes and sound effect
 - Windows notification using `plyer`
 - Reminders only appear if your screen is active (not sleeping)
@@ -32,8 +32,7 @@ Run the script:
 ```sh
 python demo.py
 ```
-- Set your desired interval in the GUI and click "Start Reminder".
-- The interval will be saved for future runs.
+The reminder will appear every 10 minutes automatically.
 
 ## Run on Startup (Optional)
 1. Create a batch file `eye_reminder.bat`:
@@ -51,9 +50,8 @@ python demo.py
 3. Place the `.vbs` file in your Windows Startup folder (`Win + R`, type `shell:startup`).
 
 ## How It Works
-- When started, a GUI lets you set the interval (in minutes).
-- The interval is saved to `interval.txt` and loaded automatically on next run.
-- Every interval, if your screen is active, a popup with blinking eyes and a sound will remind you to blink, and a Windows notification will appear.
+- When started, the program runs in the background.
+- Every 10 minutes, if your screen is active, a popup with blinking eyes and a sound will remind you to blink, and a Windows notification will appear.
 - If your screen is sleeping, the reminder is skipped until the next interval.
 
 ## License
